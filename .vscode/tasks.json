@@ -1,0 +1,228 @@
+// {
+//     // See https://go.microsoft.com/fwlink/?LinkId=733558
+//     // for the documentation about the tasks.json format
+//     "version": "0.1.0",
+//     "command": "echo",
+//     "isShellCommand": true,
+//     "args": ["Hello World"],
+//     "showOutput": "always"
+// }
+{
+    // See http://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version" : "0.1.0"
+    ,
+    "command" : "tscc"
+    ,
+    "isTestCommand" : true 
+    ,
+    "suppressTaskName" : true 
+    ,
+    "tasks" : [
+        {
+            "taskName" : "node" 
+            ,
+            "suppressTaskName" : false 
+            ,
+            "isTestCommand" : true 
+            ,
+            "command" : "node" 
+            ,
+            "args" : ["${file}"]
+            ,
+            "isBuildCommand" : true
+            ,
+            "isShellCommand" : true 
+        }
+        ,
+        {
+            "taskName" : "chrome1"  
+            ,
+            "suppressTaskName" : true 
+            ,
+            "command": "chrome"//使用chrome浏览器
+            // ,    
+            // "isShellCommand": true
+            ,
+            "isBuildCommand" : true
+            ,
+            "showOutput": "always" 
+            ,
+            "args": [
+                // "--remote-debugging-port=9222"
+                // ,
+                "${file}"
+            ]     //表示对当前文件进行操作
+            // ,
+            // "windows": {
+            //     "command": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe" //chrome浏览器的路径
+            // }
+        }
+        ,
+        {
+            "taskName" : "chrome2"
+            ,
+            "suppressTaskName" : true 
+            ,
+            "command": "chrome"//使用chrome浏览器
+            // ,    
+            // "isShellCommand": true
+            ,
+            "isBuildCommand" : true
+            ,
+            "showOutput": "always" 
+            ,
+            "args": [
+                "--remote-debugging-port=9222"
+                // ,
+                // "${file}"
+            ]     //表示对当前文件进行操作
+            // ,
+            // "windows": {
+            //     "command": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe" //chrome浏览器的路径
+            // }
+        }
+        ,
+        {
+            "command" : "node-sass"
+            // ,
+            // "windows" : {
+            //     "command" : "node-sass"
+            // }
+            ,
+            "taskName" : "sass"
+            ,
+            "isShellCommand": true
+            ,
+            "args" : [
+                "styles.scss" 
+                ,
+                "styles1.css"
+            ]
+
+        }
+        ,
+        {
+            "command" : "lessc"
+            // ,
+            // "windows" : {
+            //     "command" : "node-sass"
+            // }
+            ,
+            "taskName" : "lessc"
+            ,
+            "isShellCommand": true
+            ,
+            "args" : [
+                "styles.less" 
+                ,
+                "styles2.css"
+            ]
+
+        }
+        ,
+        {
+            "command" : "gulp"
+            ,
+            "isShellCommand" : true 
+            ,
+            "taskName" : "gulp"
+            ,
+            "showOutput" : "always" 
+            ,
+            "isBackground" : true 
+        } 
+        ,
+        {
+            "command" : "webpack"
+            ,
+            "isShellCommand" : true
+            ,
+            "isBuildCommand" : true 
+            ,
+            "showOutput" : "always"
+            ,
+            "isBackground" : true 
+            ,
+            "taskName" : "webpack"
+            ,
+            "args" : [
+                "./entry.js"
+                ,
+                "./bundle.js"
+                ,
+                "--module-bind"
+                ,
+                "css=style!css"
+            ]
+        }
+        ,
+        {
+            "command" : "webpack"
+            ,
+            "isShellCommand" : true 
+            ,
+            "isBuildCommand" : true 
+            ,
+            "isBackground" : true 
+            ,
+            "showOutput" : "always" 
+            ,
+            "taskName" : "wb"
+            ,
+            "args" : [] 
+        }
+        ,
+        {
+            "command" : "chrome"
+            ,
+            "isShellCommand" : true 
+            ,
+            "isBuildCommand" : true 
+            ,
+            "showOutput" : "always"
+            ,
+            "isBackground" : true 
+            ,
+            "taskName" : "chrome"
+            ,
+            "args" : [
+                // "${cwd}/webpack.html"
+                "${file}"
+            ]
+        }
+        ,
+        {
+            "command" : "tsc" 
+            ,
+            "args" : [
+                "-p" ,
+                "."
+            ]
+            ,
+            "isShellCommand" : true 
+            ,
+            "isBuildCommand" : true 
+            ,
+            "showOutput" : "always"
+            ,
+            "problemMatcher" : "$tsc"
+            ,
+            "taskName" : "tsc"
+        } 
+        ,
+        {
+            "command" : "markdown-it"
+            ,
+            "args" : [ "a1.md" , "-o" , "a1.html" ]
+            ,
+            "isShellCommand" : true 
+            ,
+            "showOutput" : "always"
+            ,
+            "taskName" : "mkd"
+            // ,
+            // "suppressTaskName" : true 
+        }
+    ]
+}

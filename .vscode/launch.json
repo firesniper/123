@@ -1,0 +1,109 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "node" ,
+            "request": "launch" ,
+            "name": "nodelaunch" ,
+            "program": "${file}" 
+            // , "sourceMaps" : true 
+        } 
+        , 
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "附加到端口",
+            "address": "localhost",
+            "port": 5858
+        } 
+        // , {
+        //     "name" : "cmd" ,
+        //     "type" : "chrome" ,
+        //     "request" : "launch"
+        //     // , "cmdPath" : "C:\\Windows\\System32\\cmd.exe" 
+        //     , "env": {
+        //         "CHROM_APP": "C:\\Windows\\System32\\cmd.exe"        //设置必要环境变量，这个文件就是你项目开始的那个文件
+        //     } 
+
+        // }
+        , {
+            "name": "谷歌浏览器" , //运行html文件，用谷歌浏览器打开
+            "type": "chrome" ,
+            "request": "launch" ,
+            "url": "${file}" ,
+            "sourceMaps": true ,
+            "webRoot": "${workspaceRoot}"
+        }
+        // , 
+        // {
+        //     "type": "chrome",
+        //     "request": "launch",
+        //     "name": "Chrome localhost",
+        //     "url": "http://192.168.1.3:8080/cs_trade_a03_g/${relativeFile}",
+        //     // "file" : "${file}" ,
+        //     "runtimeExecutable": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+        //     "runtimeArgs": ["--remote-debugging-port=9222"],
+        //     "userDataDir": "${workspaceRoot}/.vscode/chrome",
+        //     "webRoot": "${workspaceRoot}"
+        // }
+        ,
+        {
+            "name" : "chromeAttach"
+            ,
+            "type" : "chrome" 
+            ,
+            "request" : "attach" 
+            ,
+            "port" : 9222 
+            // ,
+            // "program" : "${file}" 
+            ,
+            "address" : "localhost" 
+
+            // ,
+            // "webRoot" : "${workspaceRoot}"
+            // ,
+            // "url": "http://localhost:8080/json"
+            // ,
+            // "file" : "${file}"
+        
+
+            // ,
+            // "target" : "--remote-debugging-port=9222" 
+            // ,
+            // "runtimeExecutable": "C:/Program Files (x86)"
+            // ,
+            // "runtimeArgs": ["--remote-debugging-port=9222"] 
+            // ,
+            // "userDataDir": "${workspaceRoot}/.vscode/chrome"
+        } 
+        ,
+        {
+            "name" : "uer" 
+            ,
+            "request" : "launch"
+            ,
+            "type" : "chrome"
+            ,
+            // "userDataDir" : "/" 
+            // ,
+            /*"pathMapping" : {
+                "wb" : "${workspaceRoot}"
+            }
+            ,*/
+            "url" : "http://localhost:3000/public/${relativeFile}"
+            /*,
+            "webRoot" : "wb"*/
+            
+            
+            
+        } 
+    ] 
+
+   
+
+}
