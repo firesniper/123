@@ -2,7 +2,7 @@
 {
 	
 	
-	O/*bject.defineProperties(
+	/*Object.defineProperties(
 		String.prototype ,
 		{
 			stringBuffer : {
