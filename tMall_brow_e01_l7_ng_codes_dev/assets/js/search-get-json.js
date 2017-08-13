@@ -196,7 +196,7 @@
 
 	} ;
 	function getAjax
-	( searchPg , servCls , anchorDom , getDomStrPatt , callback , $page , sortType )
+	( pgp_docSerh , servCls , anchorDom , getDomStrPatt , callback , $page , sortType )
 	{
 		sortType = sortType ? sortType : "_bid" ;
 		getDomStrPatt = getDomStrPatt ? 
@@ -211,37 +211,37 @@
 				   function () { return } : 
 				   defCallBack ;
 
-		var servClsKey = ( servClsKey = Object.keys( searchPg )[ 0 ] ) ? servClsKey : "scm" ;
-		servCls = servCls ? servCls : searchPg[ servClsKey ] ;
-		var pgKey = searchPg[ "pgKey" ] ;
+		var servClsKey = ( servClsKey = Object.keys( pgp_docSerh )[ 0 ] ) ? servClsKey : "scm" ;
+		servCls = servCls ? servCls : pgp_docSerh[ servClsKey ] ;
+		var pgKey = pgp_docSerh[ "pgKey" ] ;
 		
 		var governStrBuf = new Array() ;
-		governStrBuf.push( pgp_envState.pgp_envOpt.pgp_servBaseUrl + searchPg[ "scm" ] + "?" ) ;
-		hfA01 : for ( var sechKey in searchPg )
+		governStrBuf.push( pgp_envState.pgp_envOpt.pgp_servBaseUrl + pgp_docSerh[ "scm" ] + "?" ) ;
+		hfA01 : for ( var sechKey in pgp_docSerh )
 		{
-			if ( !searchPg.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
+			if ( !pgp_docSerh.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
 			governStrBuf.push(
 				  sechKey
 				+ "="
-				+ searchPg[ sechKey ] 
+				+ pgp_docSerh[ sechKey ] 
 				+ "&"
 			) ;
 			 
 		} ;
 
 		
-	/*	if ( searchPg.constructor.name == "Object" )
+	/*	if ( pgp_docSerh.constructor.name == "Object" )
 		{
 			var governStrBuf = new Array() ;
 
-			governStrBuf.push( "http://192.168.1.3:8080/mall_a01/" + searchPg[ "scm" ] + "?" ) ;
-			hfA01 : for ( var sechKey in searchPg )
+			governStrBuf.push( "http://192.168.1.3:8080/mall_a01/" + pgp_docSerh[ "scm" ] + "?" ) ;
+			hfA01 : for ( var sechKey in pgp_docSerh )
 			{
-				if ( !searchPg.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
+				if ( !pgp_docSerh.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
 				governStrBuf.push(
 					  sechKey
 					+ "="
-					+ searchPg[ sechKey ] 
+					+ pgp_docSerh[ sechKey ] 
 					+ "&"
 				) ;
 				 
@@ -341,9 +341,9 @@
 // 			( pageId == "page-infinite-scroll" )
 // 			{
 // 				// console.log( "pageId:" , pageId ) ;
-// 				// var searchPg = String.prototype.getSearch() ;
-// 				// console.log( "searchPg:" , searchPg );
-// 				// getAjax( searchPg , Object.keys( searchPg )[ 0 ] , true ) ;
+// 				// var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+// 				// console.log( "pgp_docSerh:" , pgp_docSerh );
+// 				// getAjax( pgp_docSerh , Object.keys( pgp_docSerh )[ 0 ] , true ) ;
 			
 // 			} ;
 // 		} 

@@ -214,7 +214,7 @@ Object.defineProperties
 				return type ;
 			} ,
 		} ,
-		"thisIdx" : 
+		"fnNum_thisIdx" : 
 		{
 			enumerable : false ,
 			configurable : true ,
@@ -639,7 +639,7 @@ Object.defineProperties
 (
 	String.prototype ,
 	{
-		"getSearch" : 
+		"fnPgp_getDocSerh" : 
 		{
 			enumerable : false ,
 			configurable : true ,

@@ -2,14 +2,18 @@
 {
 	console.log( "search-detail-json.js" ) ;
 	// $.init() ;
-	var defGetDomStrPatt = function ( jsonData , dataKey , searchKey , pgKey )
+	var defGetDomStrPatt = function ( params )
 	{
-		var searchPg = String.prototype.getSearch() ;
-// 		var pgKey = Object.keys( searchPg )[ 1 ] ;
-		var json = jsonData[ 0 ] ;
-		console.log( "json:" , json ) ;
+    var jary_data		= params.jary_data ;
+		/*var str_dataKey		= params.str_dataKey ;
+		var str_pgKey		= params.str_pgKey ;*/
+
+		var pgp_docSerh = String.prototype.fnPgp_getDocSerh () ;
+// 		var pgKey = Object.keys( pgp_docSerh )[ 1 ] ;
+		var jpgp_data = jary_data[ 0 ] ;
+		console.log( "jpgp_data:" , jpgp_data ) ;
 		var curPageSearch = location.search ;
-		var prePageSearch = searchPg[ "prePageSearch" ] ;
+		var prePageSearch = pgp_docSerh[ "prePageSearch" ] ;
 		console.log( "prePageSearch:" , prePageSearch ) ;
 		// $( document ).on(
 		// 	"pageInit" ,
@@ -23,31 +27,31 @@
 		// 	} 
 		// ) ;
 		
-		var postage = ( postage = json.postage ) == 0 ? "免运费" : postage ;
+		var postage = ( postage = jpgp_data.postage ) == 0 ? "免运费" : postage ;
 		
       	var domStrPatt = 
   	// '<div class="page-detail">'
   //   '    <div class="swiper-container swiper-container-horizontal" data-space-between="10">'
   // + '      <div class="swiper-wrapper">'
   // + '        <div class="swiper-slide">'
-  // + '          <img class="card-cover" src=" ' + json.link + ' " alt="">'
+  // + '          <img class="card-cover" src=" ' + jpgp_data.link + ' " alt="">'
   // + '        </div>'
   // + '        <div class="swiper-slide">'
-  // + '          <img class="card-cover" src=" ' + json.link + ' " alt="">'
+  // + '          <img class="card-cover" src=" ' + jpgp_data.link + ' " alt="">'
   // + '        </div>'
   // + '        <div class="swiper-slide">'
-  // + '          <img class="card-cover" src=" ' + json.link + ' " alt="">'
+  // + '          <img class="card-cover" src=" ' + jpgp_data.link + ' " alt="">'
   // + '        </div>'
   // + '      </div>'
   // + '      <div class="swiper-pagination"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>'
   // + '    </div><!-- swiper-container end -->'
     '    <div class="content-block goods-card">'
-  + '      <h3> ' + json.title + ' </h3>'
-  + '      <p><strong>$ ' + json.price_integer + ' </strong> <del>$ ' + json.price_origin + ' </del></p>'
+  + '      <h3> ' + jpgp_data.title + ' </h3>'
+  + '      <p><strong>$ ' + jpgp_data.price_integer + ' </strong> <del>$ ' + jpgp_data.price_origin + ' </del></p>'
   + '      <div class="row text-center color-gray">'
   + '        <div class="col-25"> ' + postage + ' </div>'
-  + '        <div class="col-50"> ' + json.sales + ' </div>'
-  + '        <div class="col-25"> ' + json.delivery + ' </div>'
+  + '        <div class="col-50"> ' + jpgp_data.sales + ' </div>'
+  + '        <div class="col-25"> ' + jpgp_data.delivery + ' </div>'
   + '      </div>'
   + '    </div><!-- goods-card end -->'
   + '    <div class="list-block media-list">'
@@ -162,7 +166,7 @@
   $( ".swiper-container img" )
   .attr( 
 	  {
-	  	"src" : json.link ,
+	  	"src" : jpgp_data.link ,
 	  } 
   ) ;
       	return domStrPatt ;
@@ -180,16 +184,20 @@
 			)
 			{
 				console.log( "pageId:" , pageId ) ;
-				var searchPg = String.prototype.getSearch() ;
-				console.log( "searchPg:" , searchPg );
-				window.$searchGetJson.getAjax( 
-					searchPg , 
-					searchPg[ Object.keys( searchPg )[ 0 ] ] , 
-					$( ".page-detail" ) , 
-					defGetDomStrPatt , 
-					null , 
-					$page ,
-					null
+				var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+				console.log( "pgp_docSerh:" , pgp_docSerh );
+				window.$searchGetJson.getAjax
+        ( 
+          {
+            pgp_serh              : pgp_docSerh , 
+            // str_servCls           : pgp_docSerh[ Object.keys( pgp_docSerh )[ 0 ] ] , 
+            jqd_anchor            : $( ".page-detail" ) , 
+            fnStr_getDomStrPatt   : defGetDomStrPatt , 
+            fn_cb                 : null , 
+            $page                 : $page ,
+            str_sortType          : null
+
+          }
 
 				) ;
 // 				var swiper = new Swiper('.swiper-container');

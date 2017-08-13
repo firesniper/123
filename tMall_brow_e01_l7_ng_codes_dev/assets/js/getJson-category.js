@@ -26,7 +26,7 @@
 	Object.defineProperties(
 		Object.prototype ,
 		{
-			thisIdx : {
+			fnNum_thisIdx : {
 				enumerable : false ,
 				configurable : true ,
 				writable : true ,
@@ -205,7 +205,7 @@
 			// 		return i ;
 			// 	} ;
 			// } ;
-			var curIdx = this.thisIdx( htmlcol ) ;
+			var curIdx = this.fnNum_thisIdx( htmlcol ) ;
 			console.log( "curIdx:" , curIdx ) ;
 			var flag = curIdx == 0 || !curIdx ? true : false ;
 			getAjax( navMap , curIdx , flag ) ;
@@ -265,7 +265,7 @@
 		) ;
 	} ;
 	// getAjax( navMap , 0 , true ) ;
-	var searchPg = String.prototype.getSearch() ;
-	console.log( "searchPg:" , searchPg );
+	var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+	console.log( "pgp_docSerh:" , pgp_docSerh );
 
 }( $ ) ;

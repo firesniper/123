@@ -2,21 +2,18 @@
 {
 	console.log( "getJson-search.js" ) ;
 	// $.init() ;
-	var defGetDomStrPatt = 
-	function 
-	( 
-		jsonData , 
-		dataKey , 
-		searchKey , 
-		pgKey 
-	)
+	var defGetDomStrPatt =  function ( params )
 	{
-// 		console.log( "jsonData:" , jsonData ) ;
-// 		dataKey = dataKey ? dataKey : pgKey ;
-		var json = jsonData[ dataKey ] ;
+// 		console.log( "jary_data:" , jary_data ) ;
+// 		str_dataKey = str_dataKey ? str_dataKey : pgKey ;
+		var jary_data		= params.jary_data ;
+		var str_dataKey		= params.str_dataKey ;
+		var str_pgKey		= params.str_pgKey ;
+
+		var json = jary_data[ str_dataKey ] ;
 		var curPageSearch = location.search ;
-		var searchPg = String.prototype.getSearch() ;
-		var prePageSearch = searchPg[ "prePageSearch" ] ;
+		var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+		var prePageSearch = pgp_docSerh[ "prePageSearch" ] ;
 // 		$( document ).on(
 // 			"pageInit" ,
 // 			function ( e , pageId , $page ) 
@@ -28,10 +25,10 @@
 // 				} ;
 // 			} 
 // 		) ;
-		var dbPaire = searchPg[ "tbNamesStr" ] ? 
-					  "&tbNamesStr=" + searchPg[ "tbNamesStr" ] :
-					   searchPg[ "dicStr" ] ?
-					  "&dicStr=" + searchPg[ "dicStr" ]	:
+		var dbPaire = pgp_docSerh[ "tbNamesStr" ] ? 
+					  "&tbNamesStr=" + pgp_docSerh[ "tbNamesStr" ] :
+					   pgp_docSerh[ "dicStr" ] ?
+					  "&dicStr=" + pgp_docSerh[ "dicStr" ]	:
 					  undefined ;
 
 		var postage = ( postage = json.postage ) == 0 ? "免运费" : postage ;
@@ -39,13 +36,13 @@
 				   '<li>'
                   +'    <div class="item-content list-item">'
                   +'        <div class="p">'
-                  +'            <a href=" ' + document.baseURI + 'home/goods-detail.html' + "?scm=" + searchPg[ "scm" ] + dbPaire + "&pgKey=" + searchKey + ' " title="">'
+                  +'            <a href=" ' + document.baseURI + 'home/goods-detail.html' + "?scm=" + pgp_docSerh[ "scm" ] + dbPaire + "&pgKey=" + str_pgKey + ' " title="">'
                   +'                <img class="p-pic" src=" ' + json.link + ' " style="visibility: visible;">'
                   +'                <span class="flag c-icon-pt"></span>'
                   +'              </a>'
                   +'        </div>'
                   +'        <div class="d">'
-                  +'            <a href=" ' + document.baseURI + 'home/goods-detail.html' + "?scm=" + searchPg[ "scm" ] + dbPaire + "&pgKey=" + searchKey + ' " title="">'
+                  +'            <a href=" ' + document.baseURI + 'home/goods-detail.html' + "?scm=" + pgp_docSerh[ "scm" ] + dbPaire + "&pgKey=" + str_pgKey + ' " title="">'
                   +'                <h3 class="d-title">  ' + json.title + ' </h3>'
                   +'            </a>'
                   +'            <p class="d-price">'
@@ -81,15 +78,15 @@
 			)
 			{
 				console.log( "pageId:" , pageId ) ;
-				var searchPg = String.prototype.getSearch() ;
-				console.log( "searchPg:" , searchPg );
+				var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+				console.log( "pgp_docSerh:" , pgp_docSerh );
 				
 				window.$searchGetJson
 				.getAjax
 				(
 					{
-						pgp_serh			: searchPg , 
-						str_servCls			: Object.keys( searchPg )[ 0 ] , 
+						pgp_serh			: pgp_docSerh , 
+						// str_servCls			: Object.keys( pgp_docSerh )[ 0 ] , 
 						jqd_anchor			: $( ".list-container.page-container" ) , 
 						fnStr_getDomStrPatt	: defGetDomStrPatt ,
 						fn_cb				: undefined ,
@@ -245,8 +242,8 @@
 						.getAjax
 						(
 							{
-								pgp_serh			: searchPg , 
-								str_servCls			: searchPg[ Object.keys( searchPg )[ 0 ] ] , 
+								pgp_serh			: pgp_docSerh , 
+								// str_servCls			: pgp_docSerh[ Object.keys( pgp_docSerh )[ 0 ] ] , 
 								jqd_anchor			: $( ".list-container.page-container" ) , 
 								fnStr_getDomStrPatt : defGetDomStrPatt ,
 								fn_cb				: undefined ,

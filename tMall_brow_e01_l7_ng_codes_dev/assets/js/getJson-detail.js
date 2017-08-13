@@ -6,7 +6,7 @@
 	/*Object.defineProperties(
 		Object.prototype ,
 		{
-			thisIdx : {
+			fnNum_thisIdx : {
 				enumerable : false ,
 				configurable : true ,
 				writable : true ,
@@ -219,9 +219,9 @@
 			)
 			{
 				// console.log( "pageId:" , pageId ) ;
-				// var searchPg = String.prototype.getSearch() ;
-				// console.log( "searchPg:" , searchPg );
-				// getAjax( searchPg , Object.keys( searchPg )[ 0 ] , true ) ;
+				// var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+				// console.log( "pgp_docSerh:" , pgp_docSerh );
+				// getAjax( pgp_docSerh , Object.keys( pgp_docSerh )[ 0 ] , true ) ;
 			} ;
 		} 
 	) ;

@@ -4,9 +4,13 @@
 {
 	"use strict" ;
 
-	var fnStr_defGetDomPatt = function ( json_data , str_dataKey , str_pgKey )
+	var fnStr_defGetDomPatt = function ( params )
 	{
-		var ary_data_pgp = json_data[ str_dataKey ] ;
+		var jary_data		= params.jary_data ;
+		var str_dataKey		= params.str_dataKey ;
+		var str_pgKey		= params.str_pgKey ;
+
+		var ary_data_pgp = jary_data[ str_dataKey ] ;
 		var str_search = location.search ;
 
 		/*$( document ).on(
@@ -56,43 +60,65 @@
       	return str_domTemp ;
 
 	} ;
-	var num_reduceCount = 0 ;
-	var pgp_idxData = null ;
-	var fnPgp_getDomStrTemp = function ( pgp_data , fn_cb , startIdx , length , str_pgKey ) 
+/*	var num_reduceCount = 0 ;
+	var pgp_idxData = null ;*/
+	var fnPgp_getDomStrTemp = function ( params ) 
 	{
-		if ( !pgp_data ) 
+		// var jary_data 		= params.jary_data ;
+		var fnStr_getDomStrPatt			= params.fnStr_getDomStrPatt ;
+		/*var num_startIdx	= params.num_startIdx ;
+		var num_len			= params.num_len ;*/
+		var str_pgKey		= params.str_pgKey ;
+		var ary_subRetData	= params.ary_subRetData ;
+		/*if ( !jary_data ) 
 		{ 
 			$.toast( "暂无数据" ) ;
-// 			throw new TypeError( "json_data null" ) ;
+// 			throw new TypeError( "jary_data null" ) ;
 // 			return ;
-		} ;
-		pgp_idxData = pgp_idxData ? pgp_idxData : pgp_data.fnPgp_setIndex () ;
-		var ary_subRetData = pgp_data.splice ( startIdx , length ) ;
-		console.log( "ary_subRetData:" , ary_subRetData.length ) ;
-// 		num_reduceCount = num_reduceCount == 0 ? length : num_reduceCount ;
-		num_reduceCount += ary_subRetData.length ;
+		} ;*/
+		/*jary_data.fnPgp_setIndex () ;
+		var ary_subRetData = jary_data.splice ( num_startIdx , num_len ) ;
+		console.log( "ary_subRetData:" , ary_subRetData.length ) ;*/
+// 		num_reduceCount = num_reduceCount == 0 ? num_len : num_reduceCount ;
+		// num_reduceCount += ary_subRetData.length ;
 		
 		var ary_buffer_str = [] ;
 		
 		hfA01 : for ( var str_subRetDataKey in ary_subRetData )
 		{
-			if ( !ary_subRetData.hasOwnProperty( str_subRetDataKey ) ) continue hfA01 ;
-// 			var num_searchKey = num_reduceCount - Math.abs( ary_subRetData.length - str_subRetDataKey ) ;
+			if ( !ary_subRetData.hasOwnProperty ( str_subRetDataKey ) ) continue hfA01 ;
+// 			var num_searchKey = num_reduceCount - Math.abs( ary_subRetData.num_len - str_subRetDataKey ) ;
 			var num_searchKey = ary_subRetData[ str_subRetDataKey ][ "index" ] - 1 ;
-			var str_domTemp = fn_cb( ary_subRetData , str_subRetDataKey , num_searchKey , str_pgKey ) ;
+			var str_domTemp = fnStr_getDomStrPatt 
+			( 
+				{
+					jary_data	: ary_subRetData , 
+					str_dataKey	: str_subRetDataKey , 
+					str_pgKey	: num_searchKey 
+				}
+			) ;
 			ary_buffer_str.push( str_domTemp ) ;
 		} ;
 		// console.log( "ary_buffer_str:" , ary_buffer_str ) ;
-		return { "pgp_reduceData" : pgp_data , "ary_buffer_str" : ary_buffer_str } ;
+		return {
+			//  "jary_reduceData" : jary_data , 
+			 "ary_buffer_str" : ary_buffer_str 
+		} ;
 	} ;
 	
-	var fn_pgInfi = function ( pgp_reduceData , dom_dom , jqd_anchor , fnStr_getDomStrPatt , str_pgKey )
+	var fn_pgInfi = function ( params )
 	{
-    	console.log( "pgInfireduceData:" , pgp_reduceData ) ;
+    	console.log( "pgInfireduceData:" , params.jary_reduceData ) ;
+		var jary_reduceData		= params.jary_reduceData ;
+		var dom_dom				= params.dom_dom ? params.dom_dom : $( "#page-infinite-scroll" ) ;
+		var jqd_anchor			= params.jqd_anchor ;
+		var fnStr_getDomStrPatt = params.fnStr_getDomStrPatt ;
+		var str_pgKey			= params.str_pgKey ;
+
     	var loading = false ;
-         
-        dom_dom
-        .on( 
+
+        dom_dom.on 
+		( 
             'infinite' , 
             function ( e ) 
             {
@@ -100,13 +126,28 @@
                 if (loading) return ;
 
                 loading = true ;
-                setTimeout( 
+                setTimeout
+				( 
                     function () 
                     {
                         loading = false ;
 
-                        var ary_buffer_str = fnPgp_getDomStrTemp( pgp_reduceData , fnStr_getDomStrPatt , 0  , 4 , str_pgKey ).ary_buffer_str ;
-                      	jqd_anchor.append( ary_buffer_str.join( "" ) ) ;	
+						// jary_reduceData.fnPgp_setIndex () ;
+						var ary_subRetData = jary_reduceData.splice ( 0 , 4 ) ;
+						console.log( "ary_subRetData:" , ary_subRetData.length ) ;
+                        var ary_buffer_str = fnPgp_getDomStrTemp
+						(
+							{
+								// jary_data		: jary_reduceData , 
+								fnStr_getDomStrPatt			: fnStr_getDomStrPatt , 
+								/*num_startIdx	: 0 , 
+								num_len			: 4 , */
+								str_pgKey		: str_pgKey ,
+								ary_subRetData	: ary_subRetData
+
+							} 
+						).ary_buffer_str ;
+                      	jqd_anchor.append ( ary_buffer_str.join( "" ) ) ;	
                     } , 
                     1000 
                 ) ;
@@ -116,150 +157,111 @@
 	} ;
 	function fn_defCb 
 	( 
-		pgp_domStr , jqd_anchor , fnStr_getDomStrPatt , $page , str_pgKey 
+		jary_data , jqd_anchor , fnStr_getDomStrPatt , $page , str_pgKey 
 	)
 	{
-		$page = $page ? $page : $( "#page-infinite-scroll" ) ;
-		fn_pgInfi ( pgp_domStr.pgp_reduceData , $page , jqd_anchor , fnStr_getDomStrPatt , str_pgKey ) ;
+
+		fn_pgInfi 
+		( 
+			{
+				jary_reduceData		: jary_data.jary_reduceData , 
+				dom_dom				: $page , 
+				jqd_anchor			: jqd_anchor , 
+				fnStr_getDomStrPatt : fnStr_getDomStrPatt , 
+				str_pgKey			: str_pgKey 
+				
+			}
+		) ;
 
 	} ;
-	function getAjax
-	( 
-		// pgp_serh , str_servCls , jqd_anchor , fnStr_getDomStrPatt , fn_cb , $page , str_sortType 
-		params
-	)
+	function getAjax (  params )
 	{
-		var pgp_serh			= params.pgp_serh ;
-		var str_servCls			= params.str_servCls ;
-		var jqd_anchor			= params.jqd_anchor ;
-		var fnStr_getDomStrPatt = params.fnStr_getDomStrPatt ;
-		var fn_cb				= params.fn_cb ;
-		var $page				= params.$page ;
-		var str_sortType		= params.str_sortType ;
+		var pgp_serh			=   params.pgp_serh ;
+		/*var str_servCls			=   params.str_servCls || 
+									( "scm" in params.pgp_serh ? params.pgp_serh [ "scm" ] : "malldata" ) ;*/
+		var jqd_anchor			=   params.jqd_anchor ;
+		var fnStr_getDomStrPatt =   params.fnStr_getDomStrPatt ? 
+									params.fnStr_getDomStrPatt : 
+									params.fnStr_getDomStrPatt === null ?
+									params.fnStr_getDomStrPatt :
+									params.fnStr_defGetDomPatt ;
+		var fn_cb				=   params.fn_cb ? 
+									params.fn_cb : 
+									params.fn_cb === null ? 
+									function () { return } : 
+									fn_defCb ; 
+		var $page				=   params.$page ;
+		var str_sortType		=   params.str_sortType ? params.str_sortType : "_bid" ;
 
-		str_sortType = str_sortType ? str_sortType : "_bid" ;
-		fnStr_getDomStrPatt = fnStr_getDomStrPatt ? 
-						fnStr_getDomStrPatt : 
-						fnStr_getDomStrPatt === null ?
-						fnStr_getDomStrPatt :
-						fnStr_defGetDomPatt ;
-
-		fn_cb = fn_cb ? 
-				   fn_cb : 
-				   fn_cb === null ? 
-				   function () { return } : 
-				   fn_defCb ;
-
-		var servClsKey = ( servClsKey = Object.keys( pgp_serh )[ 0 ] ) ? servClsKey : "scm" ;
-		str_servCls = str_servCls ? str_servCls : pgp_serh[ servClsKey ] ;
+		
 		var str_pgKey = pgp_serh[ "pgKey" ] ;
 		
-		var ary_governStrBuf = new Array() ;
-		ary_governStrBuf.push( pgp_envState.pgp_envOpt.pgp_servBaseUrl + pgp_serh[ "scm" ] + "?" ) ;
-		hfA01 : for ( var sechKey in pgp_serh )
-		{
-			if ( !pgp_serh.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
-			ary_governStrBuf.push(
-				  sechKey
-				+ "="
-				+ pgp_serh[ sechKey ] 
-				+ "&"
-			) ;
-			 
-		} ;
-
+		var str_appParams = pgp_serh.fnStr_getAppParams (  ) ;
 		
-	/*	if ( pgp_serh.constructor.name == "Object" )
-		{
-			var ary_governStrBuf = new Array() ;
-
-			ary_governStrBuf.push( "http://192.168.1.3:8080/mall_a01/" + pgp_serh[ "scm" ] + "?" ) ;
-			hfA01 : for ( var sechKey in pgp_serh )
-			{
-				if ( !pgp_serh.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
-				ary_governStrBuf.push(
-					  sechKey
-					+ "="
-					+ pgp_serh[ sechKey ] 
-					+ "&"
-				) ;
-				 
-			} ;
-			
-
-		} ; */
+	
 		$.ajax
 		(
 			{
-
 				// url : "http://localhost:8081/mall_a01/overcoat?" ,
-				url				: ary_governStrBuf.join( "" ) ,
+				url				: str_appParams ,
 				crossDomain 	: true ,
 				type			: "get" ,
 				dataType		: "jsonp" ,
 				mimeType		: "text/javascript" ,
 				scriptCharSet	: "utf-8" ,
 				jsonp 			: "jsonp" ,
-				jsonpCallback 	: "mSearchjsonp" + ( ( str_servCls ) + 1 ) ,
+				jsonpCallback 	: "mSearchjsonp" + ( pgp_serh [ "scm" ] + 1 ) ,
 				success 		: function ( json_data )
 				{
 					// $.init() ;
 					console.log( "json_data" , json_data ) ;
-					
-					
-					var fnAry_getConData = function()
-					{
-						var str_governAryKey = Object.keys( json_data )[ 0 ] ;
-						if ( !str_governAryKey ) 
-						{ 
-							$.toast( "暂无数据" ) ;
-				// 			throw new TypeError( "json_data null" ) ;
-				// 			return ;
-						} ;
-						var ary_govern = json_data[ str_governAryKey ] ;
-						hfR01 : for( var dk in json_data )
-						{
-							if ( !json_data.hasOwnProperty( dk ) || dk == str_governAryKey ) continue hfR01 ;
-							ary_govern = ary_govern.concat( json_data[ dk ] ) ;
-						} ;
-						// var sortDataField = "" ;
-						switch ( str_sortType )
-						{
-							case "" :
-								// sortDataField = "title" ;
-								ary_govern.JaSortByType( "title" , false ) ;
-							break ;
-							case "_bid" :
-								// sortDataField = "price_integer" ;
-								ary_govern.JaSortByType( "price_integer" , false ) ;
-							break ;
-							case "bid" :
-								// sortDataField = "price_integer" ;
-								ary_govern.JaSortByType( "price_integer" , true ) ;
-							break ;
-						} ;
-						
-						
-						// ary_govern[ sortDataField ].sort(
-						// function ( a , b )
-						// 	{
-						// 		return a > b ;
-						// 	} ;
-						// ) ;
-						
-						return ary_govern ;
+					if ( !Object.keys( json_data )[ 0 ] ) 
+					{ 
+						$.toast( "暂无数据" ) ;
+			// 			throw new TypeError( "json_data null" ) ;
+			// 			return ;
 					} ;
-					var conData = fnAry_getConData () ;
-					var result = !isNaN( str_pgKey ) && str_pgKey != undefined && str_pgKey != null && str_pgKey !== "" ? 
-								function () 
-								{
-									return new Array( conData[ str_pgKey ] ) ;
-								}() : 
-								conData ;
+					
+					var jary_conData = json_data.fnJary_concatJa () ;
+					jary_conData.fn_JaSortByType
+					( 
+						Object.pgp_jaTypeSerhMap [ str_sortType ] 
+					) ;
+					var jary_data = !isNaN( str_pgKey ) && str_pgKey != undefined && str_pgKey != null && str_pgKey !== "" ? 
+								 new Array ( jary_conData[ str_pgKey ] ) 
+								 : 
+								jary_conData ;
 
-					var pgp_domStr = fnPgp_getDomStrTemp( result , fnStr_getDomStrPatt , 0 , 6 , str_pgKey ) ;
-					jqd_anchor.append( pgp_domStr.ary_buffer_str.join( "" ) ) ;
-					fn_cb( pgp_domStr , jqd_anchor , fnStr_getDomStrPatt , $page ) ;
+					jary_data.fnPgp_setIndex () ;
+					var ary_subRetData = jary_data.splice ( 0 , 6 ) ;
+
+					var pgp_data = fnPgp_getDomStrTemp
+					( 
+						{
+							// jary_data		: jary_data , 
+							fnStr_getDomStrPatt			: fnStr_getDomStrPatt , 
+							/*num_startIdx	: 0 , 
+							num_len			: 6 , */
+							str_pgKey		: str_pgKey ,
+							ary_subRetData	: ary_subRetData  
+
+						}
+					) ;
+
+					jqd_anchor.append( pgp_data.ary_buffer_str.join( "" ) ) ;
+					// fn_cb( jary_data , jqd_anchor , fnStr_getDomStrPatt , $page ) ;
+					fn_pgInfi 
+					( 
+						{
+							// pgp_reduceData		: pgp_data.pgp_reduceData , 
+							jary_reduceData		: jary_data ,
+							dom_dom				: $page , 
+							jqd_anchor			: jqd_anchor , 
+							fnStr_getDomStrPatt : fnStr_getDomStrPatt , 
+							str_pgKey			: str_pgKey 
+							
+						}
+					) ;
 					// $.init() ;
 				} ,
 				error : function ( XMLHttpRequest, textStatus, errorThrown )
@@ -281,7 +283,7 @@
 // 			( pageId == "page-infinite-scroll" )
 // 			{
 // 				// console.log( "pageId:" , pageId ) ;
-// 				// var pgp_serh = String.prototype.getSearch() ;
+// 				// var pgp_serh = String.prototype.fnPgp_getDocSerh() ;
 // 				// console.log( "pgp_serh:" , pgp_serh );
 // 				// getAjax( pgp_serh , Object.keys( pgp_serh )[ 0 ] , true ) ;
 			

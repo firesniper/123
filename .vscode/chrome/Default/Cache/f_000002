@@ -227,7 +227,7 @@ Object.defineProperty(
 Object.defineProperties(
 	Object.prototype ,
 	{
-		thisIdx : {
+		fnNum_thisIdx : {
 			enumerable : false ,
 			configurable : true ,
 			writable : true ,
@@ -792,7 +792,7 @@ String.prototype.getSchema = function ( schemaRegStr , virtualPath , urlStr )
 Object.defineProperties(
 	String.prototype ,
 	{
-		getSearch : {
+		fnPgp_getDocSerh : {
 			enumerable : false ,
 			configurable : true ,
 			writable : true ,

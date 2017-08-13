@@ -23,10 +23,10 @@
 		} 
 	) ;*/
 
-	Object.defineProperties(
+	/*Object.defineProperties(
 		Object.prototype ,
 		{
-			thisIdx : {
+			fnNum_thisIdx : {
 				enumerable : false ,
 				configurable : true ,
 				writable : true ,
@@ -42,7 +42,7 @@
 				} ,
 			} ,
 		}
-	) ;
+	) ;*/
 
 	var getDomStrTemp = function ( result , flag )
 	{
@@ -232,7 +232,7 @@
 				var htmlcol = document.querySelectorAll( "#page-tab .tab-link" ) ;
 				// console.log("this == :" , this == htmlcol[ 0 ]) ;
 				
-				var curIdx = this.thisIdx( htmlcol ) ;
+				var curIdx = this.fnNum_thisIdx( htmlcol ) ;
 				// console.log( "curIdx:" , curIdx ) ;
 				var flag = curIdx == 0 || !curIdx ? true : false ;
 				getAjax( navMap , curIdx , flag ) ;
@@ -281,8 +281,8 @@
 	// 		console.log( "$page:" , $page ) ;
 	// 		if ( pageId == "page-infinite-scroll" ) 
 	// 		{
-	// 			var searchPg = String.prototype.getSearch() ;
-	// 			window.$searchGetJson.getAjax( searchPg , Object.keys( searchPg )[ 0 ] , $( ".list-container.page-container" ) ) ;
+	// 			var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+	// 			window.$searchGetJson.getAjax( pgp_docSerh , Object.keys( pgp_docSerh )[ 0 ] , $( ".list-container.page-container" ) ) ;
 	// 		} ;
 	// 	} 
 

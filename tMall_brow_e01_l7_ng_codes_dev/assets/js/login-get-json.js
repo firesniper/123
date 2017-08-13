@@ -3,11 +3,11 @@
 (function( $ )
 {
 	
-	var searchPg = String.prototype.getSearch() ;
-	var dbPaire = searchPg[ "tbNamesStr" ] ? 
-					  "&tbNamesStr=" + searchPg[ "tbNamesStr" ] :
-					   searchPg[ "dicStr" ] ?
-					  "&dicStr=" + searchPg[ "dicStr" ]	:
+	var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+	var dbPaire = pgp_docSerh[ "tbNamesStr" ] ? 
+					  "&tbNamesStr=" + pgp_docSerh[ "tbNamesStr" ] :
+					   pgp_docSerh[ "dicStr" ] ?
+					  "&dicStr=" + pgp_docSerh[ "dicStr" ]	:
 					  undefined ;
 
 	var defGetDomStrPatt = 
@@ -182,7 +182,7 @@
 
 	} ;
 	function getAjax
-	( searchPg , servCls , anchorDom , getDomStrPatt , callback , $page , sortType )
+	( pgp_docSerh , servCls , anchorDom , getDomStrPatt , callback , $page , sortType )
 	{
 		sortType = sortType ? sortType : "_bid" ;
 		getDomStrPatt = getDomStrPatt ? 
@@ -197,21 +197,21 @@
 				   function () { return } : 
 				   defCallBack ;
 
-		var servClsKey = ( servClsKey = Object.keys( searchPg )[ 0 ] ) ? servClsKey : "scm" ;
-		servCls = servCls ? servCls : searchPg[ servClsKey ] ;
-		var pgKey = searchPg[ "pgKey" ] ;
-		if ( searchPg.constructor.name == "Object" )
+		var servClsKey = ( servClsKey = Object.keys( pgp_docSerh )[ 0 ] ) ? servClsKey : "scm" ;
+		servCls = servCls ? servCls : pgp_docSerh[ servClsKey ] ;
+		var pgKey = pgp_docSerh[ "pgKey" ] ;
+		if ( pgp_docSerh.constructor.name == "Object" )
 		{
-			// var governStrKey = Object.keys( searchPg )[ 0 ] ;
+			// var governStrKey = Object.keys( pgp_docSerh )[ 0 ] ;
 			var governStrBuf = [] ;
-			governStrBuf.push( pgp_envState.pgp_envOpt.pgp_servBaseUrl + searchPg[ "scm" ] + "?" ) ;
-			hfA01 : for ( var sechKey in searchPg )
+			governStrBuf.push( pgp_envState.pgp_envOpt.pgp_servBaseUrl + pgp_docSerh[ "scm" ] + "?" ) ;
+			hfA01 : for ( var sechKey in pgp_docSerh )
 			{
-				if ( !searchPg.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
+				if ( !pgp_docSerh.hasOwnProperty( sechKey ) && sechKey == "scm" ) continue hfA01 ;
 				governStrBuf.push(
 					  sechKey
 					+ "="
-					+ searchPg[ sechKey ] 
+					+ pgp_docSerh[ sechKey ] 
 					+ "&"
 				) ;
 				 
@@ -301,12 +301,12 @@
 			( pageId == "page-settings" )
 			{
 				console.log( "pageId:" , pageId ) ;
-				var searchPg = String.prototype.getSearch() ;
-				console.log( "searchPg:" , searchPg );
-				// getAjax( searchPg , searchPg[ Object.keys( searchPg )[ 0 ] ] , true ) ;
+				var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+				console.log( "pgp_docSerh:" , pgp_docSerh );
+				// getAjax( pgp_docSerh , pgp_docSerh[ Object.keys( pgp_docSerh )[ 0 ] ] , true ) ;
 				getAjax( 
-					searchPg , 
-					searchPg[ Object.keys( searchPg )[ 0 ] ] , 
+					pgp_docSerh , 
+					pgp_docSerh[ Object.keys( pgp_docSerh )[ 0 ] ] , 
 					$( ".content" ) , 
 					defGetDomStrPatt , 
 					null , 
