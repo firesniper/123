@@ -1,0 +1,166 @@
+// {
+//     // See https://go.microsoft.com/fwlink/?LinkId=733558
+//     // for the documentation about the tasks.json format
+//     "version": "0.1.0",
+//     "command": "echo",
+//     "isShellCommand": true,
+//     "args": ["Hello World"],
+//     "showOutput": "always"
+// }
+{
+    // See http://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version" : "0.1.0"
+    // ,
+    // "suppressTaskName" : true 
+    ,
+    "tasks" : [
+        {
+            "taskName" : "node"
+            ,
+            "command" : "node" 
+            ,
+            "args" : ["${file}"]
+            ,
+            "isBuildCommand" : true
+            ,
+            "isShellCommand" : true 
+        }
+        ,
+        {
+            "taskName" : "t1"  
+            ,
+            "suppressTaskName" : true 
+            ,
+            "command": "chrome"//使用chrome浏览器
+            // ,    
+            // "isShellCommand": true
+            ,
+            "isBuildCommand" : true
+            ,
+            "showOutput": "always" 
+            ,
+            "args": [
+                // "--remote-debugging-port=9222"
+                // ,
+                "${file}"
+            ]     //表示对当前文件进行操作
+            // ,
+            // "windows": {
+            //     "command": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe" //chrome浏览器的路径
+            // }
+        }
+        ,
+        {
+            "taskName" : "t2"
+            ,
+            "suppressTaskName" : true 
+            ,
+            "command": "chrome"//使用chrome浏览器
+            // ,    
+            // "isShellCommand": true
+            ,
+            "isBuildCommand" : true
+            ,
+            "showOutput": "always" 
+            ,
+            "args": [
+                "--remote-debugging-port=9222"
+                // ,
+                // "${file}"
+            ]     //表示对当前文件进行操作
+            // ,
+            // "windows": {
+            //     "command": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe" //chrome浏览器的路径
+            // }
+        }
+        ,
+        {
+            "command" : "node-sass"
+            // ,
+            // "windows" : {
+            //     "command" : "node-sass"
+            // }
+            ,
+            "taskName" : "sass"
+            ,
+            "isShellCommand": true
+            ,
+            "args" : [
+                "styles.scss" 
+                ,
+                "styles1.css"
+            ]
+
+        }
+        ,
+        {
+            "command" : "lessc"
+            // ,
+            // "windows" : {
+            //     "command" : "node-sass"
+            // }
+            ,
+            "taskName" : "lessc"
+            ,
+            "isShellCommand": true
+            ,
+            "args" : [
+                "styles.less" 
+                ,
+                "styles2.css"
+            ]
+
+        }
+        ,
+        {
+            "command" : "gulp"
+            ,
+            "isShellCommand" : true 
+            ,
+            "taskName" : "default"
+            ,
+            "showOutput" : "always" 
+            ,
+            "isBackground" : true 
+        } 
+        ,
+        {
+            "command" : "webpack"
+            ,
+            "isShellCommand" : true
+            ,
+            "isBuildCommand" : true 
+            ,
+            "showOutput" : "always"
+            ,
+            "isBackground" : true 
+            ,
+            "taskName" : "webpack"
+            ,
+            "args" : [
+                "./entry.js"
+                ,
+                "./bundle.js"
+            ]
+        }
+        ,
+        {
+            "command" : "chrome"
+            ,
+            "isShellCommand" : true 
+            ,
+            "isBuildCommand" : true 
+            ,
+            "showOutput" : "always"
+            ,
+            "isBackground" : true 
+            ,
+            "taskName" : "chrome"
+            ,
+            "args" : [
+                "${workspaceRoot}/webpack.html"
+            ]
+        }
+    ]
+}
