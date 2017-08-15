@@ -189,7 +189,7 @@
 				window.$getJsonSearch.getAjax
         ( 
           {
-            pgp_serh              : pgp_docSerh , 
+            pgp_docSerh              : pgp_docSerh , 
             // str_servCls           : pgp_docSerh[ Object.keys( pgp_docSerh )[ 0 ] ] , 
             qad_anchor            : $( ".page-detail" ) , 
             fnStr_getDomPatt   : defGetDomStrPatt , 

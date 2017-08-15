@@ -177,9 +177,9 @@
 	} ;*/
 	function getAjax (  params )
 	{
-		var pgp_serh			=   params.pgp_serh ;
+		var pgp_docSerh			=   params.pgp_docSerh ;
 		/*var str_servCls			=   params.str_servCls || 
-									( "scm" in params.pgp_serh ? params.pgp_serh [ "scm" ] : "malldata" ) ;*/
+									( "scm" in params.pgp_docSerh ? params.pgp_docSerh [ "scm" ] : "malldata" ) ;*/
 		var qad_anchor			=   params.qad_anchor ;
 		var fnStr_getDomPatt =   params.fnStr_getDomPatt ? 
 									params.fnStr_getDomPatt : 
@@ -195,23 +195,24 @@
 		var str_sortType		=   params.str_sortType ? params.str_sortType : "_bid" ;
 
 		
-		var str_pgKey = pgp_serh[ "pgKey" ] ;
+		var str_pgKey = pgp_docSerh[ "pgKey" ] ;
 		
-		var str_appParams = pgp_serh.fnStr_getAppParams (  ) ;
+		var str_appParams = pgp_docSerh.fnStr_getAppParams (  ) ;
 		
 	
 		$.ajax
 		(
 			{
 				// url : "http://localhost:8081/mall_a01/overcoat?" ,
-				url				: str_appParams ,
+				url				: pgp_envState.pgp_envOpt.pgp_servBaseUrl 
+									+ str_appParams ,
 				crossDomain 	: true ,
 				type			: "get" ,
 				dataType		: "jsonp" ,
 				mimeType		: "text/javascript" ,
 				scriptCharSet	: "utf-8" ,
 				jsonp 			: "jsonp" ,
-				jsonpCallback 	: "mSearchjsonp" + ( pgp_serh [ "scm" ] + 1 ) ,
+				jsonpCallback 	: "mSearchjsonp" + ( pgp_docSerh [ "scm" ] + 1 ) ,
 				success 		: function ( json_data )
 				{
 					// $.init() ;
@@ -284,9 +285,9 @@
 // 			( pageId == "page-infinite-scroll" )
 // 			{
 // 				// console.log( "pageId:" , pageId ) ;
-// 				// var pgp_serh = String.prototype.fnPgp_getDocSerh() ;
-// 				// console.log( "pgp_serh:" , pgp_serh );
-// 				// getAjax( pgp_serh , Object.keys( pgp_serh )[ 0 ] , true ) ;
+// 				// var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+// 				// console.log( "pgp_docSerh:" , pgp_docSerh );
+// 				// getAjax( pgp_docSerh , Object.keys( pgp_docSerh )[ 0 ] , true ) ;
 			
 // 			} ;
 // 		} 

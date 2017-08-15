@@ -3,7 +3,7 @@
 	"use strict" ;
 	console.log( "index-get-json.js" ) ;
 	// $.init() ;
-	var pgp_serh = { scm : "malldata" , tbNamesStr : "shoe,overcoat" } ;
+	var pgp_docSerh = { scm : "malldata" , tbNamesStr : "shoe,overcoat" } ;
 
 	var defGetDomStrPatt = function ( params )
 	{
@@ -15,7 +15,7 @@
 // 		str_dataKey = str_dataKey ? str_dataKey : pgKey ;
 		var jpgp_data = jary_data[ str_dataKey ] ;
 		// var curPageSearch = location.search ;
-		// var pgp_serh = String.prototype.fnPgp_getDocSerh() ;
+		// var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
 // 		$( document ).on(
 // 			"pageInit" ,
 // 			function ( e , pageId , $page ) 
@@ -27,16 +27,16 @@
 // 				} ;
 // 			} 
 // 		) ;
-		var dbPaire = pgp_serh[ "tbNamesStr" ] ? 
-					  "&tbNamesStr=" + pgp_serh[ "tbNamesStr" ] :
-					   pgp_serh[ "dicStr" ] ?
-					  "&dicStr=" + pgp_serh[ "dicStr" ]	:
+		var dbPaire = pgp_docSerh[ "tbNamesStr" ] ? 
+					  "&tbNamesStr=" + pgp_docSerh[ "tbNamesStr" ] :
+					   pgp_docSerh[ "dicStr" ] ?
+					  "&dicStr=" + pgp_docSerh[ "dicStr" ]	:
 					  undefined ;
 
 		var postage = ( postage = jpgp_data.postage ) == 0 ? "免运费" : postage ;
 		var domStrTemp = 
 			   '<a href= ' + document.baseURI + 'home/goods-detail.html' 
-			 + "?scm=" + pgp_serh[ "scm" ] + dbPaire + "&pgKey=" + str_pgKey + ' >'
+			 + "?scm=" + pgp_docSerh[ "scm" ] + dbPaire + "&pgKey=" + str_pgKey + ' >'
 			 + '      <div class="card color-default">'
 			 + '         <div style="" valign="bottom" class="card-header color-white no-border no-padding">'
 			 + '           <img class="card-cover" src= ' + jpgp_data.link + ' alt="">'
@@ -69,15 +69,15 @@
 			)
 			{
 				console.log( "pageId:" , pageId ) ;
-// 				var pgp_serh = String.prototype.fnPgp_getDocSerh() ;
-				console.log( "pgp_serh:" , pgp_serh );
+// 				var pgp_docSerh = String.prototype.fnPgp_getDocSerh() ;
+				console.log( "pgp_docSerh:" , pgp_docSerh );
 				
 				window.$getJsonSearch
 				.getAjax
 				(
 					{
-						pgp_serh			: pgp_serh , 
-						// str_servCls			: pgp_serh [ Object.keys( pgp_serh )[ 0 ] ] , 
+						pgp_docSerh			: pgp_docSerh , 
+						// str_servCls			: pgp_docSerh [ Object.keys( pgp_docSerh )[ 0 ] ] , 
 						qad_anchor			: $( "#page-home .list" ) , 
 						fnStr_getDomPatt : defGetDomStrPatt ,
 						fn_cb				: undefined ,

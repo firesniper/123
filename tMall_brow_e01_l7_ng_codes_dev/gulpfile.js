@@ -1,6 +1,6 @@
 let pgp_indeEnv = {
     str_desktop         : "C:/Users/Administrator/Desktop/" ,
-    str_cwr             : "E:/Repos_git/repo_tMall_e_codes/tMall_brow_e01_l7_ng_codes_dev/" ,
+    str_cwr             : "E:/Repos_git/repo_tMall_e_codes/tMall_brow_f01_l7_ng_codes_dev/" ,
     str_node_me         : "D:/ProgramFiles/node_me/" 
 } ;
 
@@ -65,7 +65,7 @@ let pgp_compileFd_html = pgp_gulpLib.fnPgp_compileFd
                 ]
             } ,
             str_srcBaseUri : "http://PH_host:8080/abc/" ,
-            str_destBaseUri : "http://localhost:3000/public/tMall_brow_e01_l7_ng_codes_dev/" ,
+            str_destBaseUri : "http://localhost:3000/public/tMall_brow_f01_l7_ng_codes_dev/" ,
             str_destVirPath : 2 ,
             "pgp_baseUri_ary" : 
             {
@@ -106,14 +106,14 @@ let pgp_compileFd_less = pgp_gulpLib.fnPgp_compileFd
                 ]
             } ,
             str_srcBaseUri : "http://PH_host:8080/abc/" ,
-            str_destBaseUri : "http://localhost:3000/public/tMall_brow_e01_l7_ng_codes_dev/" ,
+            str_destBaseUri : "http://localhost:3000/public/tMall_brow_f01_l7_ng_codes_dev/" ,
             str_destVirPath : 2 ,
             /*"pgp_baseUri_ary" : 
             {
                 "^PH_baseUri%" : 
                 [
                     "http://PH_localhost-a:3000/1/" ,
-                    "http://localhost:8080/public/tMall_brow_e01_l7_ng_codes_dev/"
+                    "http://localhost:8080/public/tMall_brow_f01_l7_ng_codes_dev/"
                 ] ,
                 "^PH_baseUri2%" : 
                 [

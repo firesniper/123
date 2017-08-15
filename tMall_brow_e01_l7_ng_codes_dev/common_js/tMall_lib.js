@@ -138,23 +138,22 @@
 				writable : true ,
 				value : function ( params )
 				{
-					// var pgp_serh = params.pgp_serh ;
+					// var pgp_docSerh = params.pgp_docSerh ;
 					var _this = this ;
-					var pgp_serh = _this ;
+					var pgp_docSerh = _this ;
 					var ary_governStrBuf = new Array () ;
 					ary_governStrBuf.push
 					( 
-						pgp_envState.pgp_envOpt.pgp_servBaseUrl 
-						+ pgp_serh [ "scm" ] 
+						pgp_docSerh [ "scm" ] 
 						+ "?" 
 					) ;
-					hfA01 : for ( var sechKey in pgp_serh )
+					hfA01 : for ( var sechKey in pgp_docSerh )
 					{
-						if ( !pgp_serh.hasOwnProperty ( sechKey ) && sechKey == "scm" ) continue hfA01 ;
+						if ( !pgp_docSerh.hasOwnProperty ( sechKey ) && sechKey == "scm" ) continue hfA01 ;
 						ary_governStrBuf.push (
 							sechKey
 							+ "="
-							+ pgp_serh [ sechKey ] 
+							+ pgp_docSerh [ sechKey ] 
 							+ "&"
 						) ;
 						
